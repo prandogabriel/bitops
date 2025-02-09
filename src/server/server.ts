@@ -40,7 +40,7 @@ export function startServer() {
 			req.on("end", () => {
 				try {
 					const { accessToken } = JSON.parse(body);
-					logger.info("✅ login success:");
+					logger.info("✅ login success");
 					saveToken(accessToken);
 
 					res.writeHead(200, { "Content-Type": "application/json" });
@@ -60,15 +60,12 @@ export function startServer() {
 		res.end("Route not found.");
 	});
 
-	server.listen(PORT, () => {
-		logger.info(`HTTPS server running at https://localhost:${PORT}`);
-	});
+	server.listen(PORT);
 }
 
 export function closeServer() {
 	if (server) {
 		server.close(() => {
-			logger.info("🛑 Server closed.");
 			server = null;
 		});
 	} else {

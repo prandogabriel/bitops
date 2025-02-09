@@ -1,0 +1,32 @@
+error: {
+    type: 'error',
+    error: {
+      message: 'This API is only accessible with the following authentication types: apppassword, session, api_token'
+    }
+  },
+  request: {
+    method: 'PUT',
+    url: 'https://api.bitbucket.org/2.0/repositories/prandogabriel/test/permissions-config/users/%7Bbf2960aa-924a-43d8-b919-ef11d49cdc34%7D',
+    body: '{"permission":"write"}',
+    headers: {
+      accept: 'application/json',
+      'user-agent': 'bitbucket.js/2.12.0',
+      authorization: 'Bearer ',
+      'content-type': 'application/json; charset=utf-8'
+    },
+    request: { hook: [Function], validate: [Object] }
+  },
+  status: 403
+
+// new endpoints with the same error 
+// https://developer.atlassian.com/cloud/bitbucket/new-repo-permission-apis/
+
+curl --request PUT \
+  --url 'https://api.bitbucket.org/2.0/repositories/prandogabriel/test/permissions-config/users/{bf2960aa-924a-43d8-b919-ef11d49cdc34}' \
+  --header 'Authorization: Bearer =' \
+  --header 'Accept: application/json' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "permission": "read"
+}'
+{"type": "error", "error": {"message": "This API is only accessible with the following authentication types: apppassword, session, api_token"}}%
