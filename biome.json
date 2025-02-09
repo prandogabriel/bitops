@@ -21,7 +21,12 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true
-		}
+		},
+		"ignore": [
+			"node_modules/**/*",
+			"dist/**/*",
+			"src/modules/repositories/update-branch-restriction.test.ts"
+		]
 	},
 	"javascript": {
 		"formatter": {

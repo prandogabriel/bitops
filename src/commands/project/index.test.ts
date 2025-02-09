@@ -1,14 +1,14 @@
 import inquirer from "inquirer";
 import { describe, expect, it, vi } from "vitest";
 import {
-  askBranchPattern,
-  askDescription,
-  askId,
-  askModifyExemptUsers,
-  askName,
-  askResourceType,
-  askVisibility,
-  askWorkspace,
+	askBranchPattern,
+	askDescription,
+	askId,
+	askModifyExemptUsers,
+	askName,
+	askResourceType,
+	askVisibility,
+	askWorkspace,
 } from "./../../utils/inquirer";
 
 vi.mock("@commands/project");
