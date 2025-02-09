@@ -1,6 +1,4 @@
 import { logger } from "@libs/logger";
-import { createProject } from "@modules/projects/create";
-import { createRepo } from "@modules/repositories/create";
 import { listWorkspaces } from "@modules/workspaces/list";
 import {
 	askDescription,

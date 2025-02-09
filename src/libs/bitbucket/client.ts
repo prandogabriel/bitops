@@ -9,4 +9,5 @@ export const bitbucket = new Bitbucket({
 		username: basicAuth.username,
 		password: basicAuth.appPass,
 	},
+	notice: false,
 });
