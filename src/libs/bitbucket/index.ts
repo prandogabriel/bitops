@@ -116,3 +116,59 @@ export async function getUser(selected_user_id: string) {
 
 	return response.data;
 }
+
+export async function listBranchRestrictions({
+	repo_slug,
+	workspace,
+}: {
+	repo_slug: string;
+	workspace: string;
+}) {
+	return bitbucket.repositories.listBranchRestrictions({
+		workspace,
+		repo_slug,
+	});
+}
+
+export async function updateRepoBranchRestriction({
+	id,
+	repo_slug,
+	workspace,
+	pattern,
+	users = [],
+}: {
+	id: number;
+	repo_slug: string;
+	workspace: string;
+	pattern: string;
+	users: {
+		uuid: string;
+	}[];
+}) {
+
+	console.log("posting", {
+		workspace,
+		repo_slug,
+		id: id.toString(),
+		_body: Object({
+			branch_match_kind: "glob",
+			users,
+			groups: [],
+			pattern: pattern,
+		}),
+	});
+	
+	return bitbucket.repositories.updateBranchRestriction({
+		workspace,
+		repo_slug,
+		id: id.toString(),
+		_body: Object({
+			branch_match_kind: "glob",
+			users,
+			groups: [],
+			pattern: pattern,
+		}),
+	}).catch((e) => {
+		console.log(e);
+	});
+}

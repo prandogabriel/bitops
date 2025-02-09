@@ -1,3 +1,4 @@
+import { logger } from "@libs/logger";
 import inquirer from "inquirer";
 
 const askInput = async (message: string): Promise<string> => {
@@ -12,7 +13,7 @@ const askInput = async (message: string): Promise<string> => {
 
 async function chooseInput<T = string>(
 	message: string,
-	choices: { name: string; value: string | boolean }[],
+	choices: { name: string; value: string | boolean | number }[],
 ): Promise<T> {
 	const response = await inquirer.prompt({
 		type: "list",
@@ -58,4 +59,118 @@ export const askWorkspace = async (
 	}
 
 	return chooseInput("What is the workspace?", workspaces);
+};
+
+export const askId = async (action: string, ids: number[]) => {
+	const { id } = await inquirer.prompt([
+		{
+			type: "list",
+			name: "id",
+			message: `Select the branch restriction to ${action}:`,
+			choices: ids.map((id) => ({ name: `ID ${id}`, value: id })),
+		},
+	]);
+	return id;
+};
+
+export const askBranchType = async (defaultValue: string) => {
+	const { branchType } = await inquirer.prompt([
+		{
+			type: "list",
+			name: "branchType",
+			message: "Select the branch restriction type:",
+			choices: [
+				{ name: "Push Restriction", value: "push" },
+				{ name: "Force Push Restriction", value: "force" },
+				{ name: "Delete Restriction", value: "delete" },
+				{ name: "Merge Check Restriction", value: "merge-check" },
+			],
+			default: defaultValue,
+		},
+	]);
+	return branchType;
+};
+
+export const askPermission = async (defaultValue: string) => {
+	const { permission } = await inquirer.prompt([
+		{
+			type: "list",
+			name: "permission",
+			message: "Select the new permission level:",
+			choices: [
+				{ name: "Read", value: "read" },
+				{ name: "Write", value: "write" },
+				{ name: "Admin", value: "admin" },
+			],
+			default: defaultValue,
+		},
+	]);
+	return permission;
+};
+
+export const askBranchPattern = async (defaultValue: string) => {
+	const { branchPattern } = await inquirer.prompt([
+		{
+			type: "input",
+			name: "branchPattern",
+			message: `Enter the branch pattern (enter to maintain ${defaultValue}):`,
+			default: defaultValue,
+		},
+	]);
+	return branchPattern;
+};
+
+export const askModifyExemptUsers = async (
+	currentUsers: { uuid: string; displayName: string }[],
+) => {
+	const { willAddUsers } = await inquirer.prompt([
+		{
+			type: "confirm",
+			name: "willAddUsers",
+			message: "Do you want to add users to the exemption list?",
+		},
+	]);
+
+	const addUsers = [];
+
+	if (willAddUsers) {
+		const { newUsers } = await inquirer.prompt([
+			{
+				type: "input",
+				name: "newUsers",
+				message:
+					"Enter the usernames to ADD to exemption list (comma-separated):",
+				filter: (input) =>
+					input
+						? input
+								.split(",")
+								.map((user: string) => user.trim())
+								.filter(Boolean)
+						: [],
+			},
+		]);
+		addUsers.push(
+			...newUsers.map((u: string) => ({ uuid: u, displayName: u })),
+		);
+	}
+
+	if (currentUsers.length === 0) {
+		logger.info("No users to remove from exemption list.");
+		return { addUsers, removeUsers: [] };
+	}
+
+	const { removeUsers } = await inquirer.prompt([
+		{
+			type: "checkbox",
+			name: "removeUsers",
+			message:
+				"Select users to REMOVE from exemption list (leave empty to skip):",
+			choices: currentUsers.map((user) => ({
+				name: user.displayName,
+				value: user.uuid,
+			})),
+		},
+	]);
+
+	return { addUsers, removeUsers };
 };

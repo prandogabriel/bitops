@@ -1,6 +1,7 @@
 import type { Command } from "commander";
 import { registerAddUserCommand } from "./add-user";
 import { registerNewCommand } from "./new";
+import { registerUpdateBranchRestrictionCommand } from "./update-branch-restrictions";
 
 export const registerRepoCommand = (parent: Command) => {
 	const that = parent
@@ -10,6 +11,7 @@ export const registerRepoCommand = (parent: Command) => {
 
 	registerAddUserCommand(that);
 	registerNewCommand(that);
+	registerUpdateBranchRestrictionCommand(that);
 
 	return that;
 };
