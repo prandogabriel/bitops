@@ -15,7 +15,9 @@
   "license": "MIT",
   "dependencies": {
     "bitbucket": "^2.12.0",
-    "commander": "^13.1.0"
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "inquirer": "^12.4.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -23,7 +25,6 @@
     "@types/node": "^22.13.1",
     "esbuild": "^0.25.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.23.0"
+    "typescript": "^5.7.3"
   }
 }

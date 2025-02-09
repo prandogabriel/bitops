@@ -1,6 +1,7 @@
+import {  logger} from "@libs/logger";
 import { startServer } from "@server/server";
 
-const CLIENT_ID = process.env.BITBUCKET_CLIENT_ID;
+const CLIENT_ID = process.env.BITBUCKET_CLIENT_ID ?? "NbD66ZE6TQ3YLL6953";
 
 export const runLogin = async () => {
 	const loginUrl =
@@ -8,5 +9,5 @@ export const runLogin = async () => {
 
 	startServer();
 
-	console.log("To complete login, open $loginUrl");
+	logger.info(`To complete login, open ${loginUrl}`);
 };

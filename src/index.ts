@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { logger } from "@libs/logger";
 import { Command } from "commander";
 import { registerLoginCommand } from "./commands/login";
 import { registerNewCommand } from "./commands/new";
@@ -13,5 +14,5 @@ registerNewCommand(program);
 registerLoginCommand(program);
 
 program.parseAsync(process.argv).catch((error) => {
-	console.error(error);
+	logger.error(error);
 });

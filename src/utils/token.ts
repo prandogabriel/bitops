@@ -1,4 +1,5 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { logger } from "@libs/logger";
 
 const CONFIG_DIR = process.env.CONFIG_DIR ?? `${process.env.HOME}/.bitops`;
 const CONFIG_FILE = `${CONFIG_DIR}/config.json`;
@@ -17,7 +18,7 @@ export function saveToken(accessToken: string) {
 
 export function getToken(): string | null {
 	if (!existsSync(CONFIG_FILE)) {
-		console.warn("⚠️ Please running login command.");
+		logger.info("⚠️ Please running login command.");
 		return null;
 	}
 
@@ -26,7 +27,7 @@ export function getToken(): string | null {
 		const json = JSON.parse(data);
 		return json.accessToken || null;
 	} catch (error) {
-		console.error("❌ Error reading token:", error);
+		logger.error("❌ Error reading token");
 		return null;
 	}
 }

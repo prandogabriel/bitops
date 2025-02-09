@@ -1,9 +1,10 @@
-import { createServer, type Server } from "node:https";
 import { readFileSync } from "node:fs";
+import { type Server, createServer } from "node:https";
 import { join } from "node:path";
 import { URL } from "node:url";
-import { getCallbackHtml } from "./callback-html";
+import { logger } from "@libs/logger";
 import { saveToken } from "@utils/token";
+import { getCallbackHtml } from "./callback-html";
 
 const PORT = 3000;
 let server: Server | null = null;
@@ -17,7 +18,7 @@ const options = {
 
 export function startServer() {
 	if (server) {
-		console.log("🚀 Server is already running.");
+		logger.info("🚀 Server is already running.");
 		return;
 	}
 
@@ -39,7 +40,7 @@ export function startServer() {
 			req.on("end", () => {
 				try {
 					const { accessToken } = JSON.parse(body);
-					console.log("✅ login success:");
+					logger.info("✅ login success:");
 					saveToken(accessToken);
 
 					res.writeHead(200, { "Content-Type": "application/json" });
@@ -47,7 +48,7 @@ export function startServer() {
 
 					setTimeout(closeServer, 1000);
 				} catch (error) {
-					console.error("❌ Error processing token:", error);
+					logger.error("❌ Error processing token");
 					res.writeHead(500, { "Content-Type": "application/json" });
 					res.end(JSON.stringify({ error: "Failed to process token" }));
 				}
@@ -60,17 +61,17 @@ export function startServer() {
 	});
 
 	server.listen(PORT, () => {
-		console.log(`🚀 HTTPS server running at https://localhost:${PORT}`);
+		logger.info(`HTTPS server running at https://localhost:${PORT}`);
 	});
 }
 
 export function closeServer() {
 	if (server) {
 		server.close(() => {
-			console.log("🛑 Server closed.");
+			logger.info("🛑 Server closed.");
 			server = null;
 		});
 	} else {
-		console.log("⚠️ No server is running.");
+		logger.info("⚠️ No server is running.");
 	}
 }

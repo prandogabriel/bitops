@@ -5,6 +5,7 @@
       "@utils/*": ["utils/*"], 
       "@commands/*": ["commands/*"], 
       "@server/*": ["server/*"], 
+      "@libs/*": ["libs/*"], 
       "@modules/*": ["modules/*"]
     },
     "target": "es2017",
@@ -15,10 +16,10 @@
     "strict": true,
     "skipLibCheck": true,
     "noImplicitAny": true,
-    "outDir": "./dist",
+    "outDir": "./dist"
   },
   "include": [
-    "src/*.ts",
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"
