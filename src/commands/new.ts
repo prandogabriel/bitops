@@ -2,14 +2,14 @@ import { logger } from "@libs/logger";
 import { createProject } from "@modules/projects/create";
 import { createRepo } from "@modules/repositories/create";
 import { listWorkspaces } from "@modules/workspaces/list";
-import type { Command } from "commander";
 import {
 	askDescription,
 	askName,
 	askResourceType,
 	askVisibility,
 	askWorkspace,
-} from "./inquirer";
+} from "@utils/inquirer";
+import type { Command } from "commander";
 
 export const registerNewCommand = (parent: Command) => {
 	const that = parent

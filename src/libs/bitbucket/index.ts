@@ -1,6 +1,13 @@
 import { createSlug } from "@utils/slug";
 import { bitbucket } from "./client";
-import type { CreateProjectInput, CreateRepoInput } from "./types";
+import type {
+	AddUserToProjectInput,
+	AddUserToRepoInput,
+	CreateProjectInput,
+	CreateRepoInput,
+	RemoveUserFromProjectInput,
+	RemoveUserFromRepoInput,
+} from "./types";
 
 export async function createProject({
 	description,
@@ -44,4 +51,68 @@ export async function createRepo({
 
 export async function listWorkspaces() {
 	return (await bitbucket.workspaces.getWorkspaces({})).data.values ?? [];
+}
+
+export async function addUserToRepo({
+	repo_slug,
+	workspace,
+	username,
+	permission,
+	selected_user_id,
+}: AddUserToRepoInput) {
+	return bitbucket.repositories.updateUserPermission({
+		workspace,
+		repo_slug,
+		selected_user_id,
+		_body: Object({
+			username,
+			permission,
+		}),
+	});
+}
+
+export async function removeUserFromRepo({
+	repo_slug,
+	workspace,
+	selected_user_id,
+}: RemoveUserFromRepoInput) {
+	return bitbucket.repositories.deleteUserPermission({
+		workspace,
+		repo_slug,
+		selected_user_id,
+	});
+}
+
+export async function addUserToProject({
+	project,
+	workspace,
+	permission,
+	selected_user_id,
+}: AddUserToProjectInput) {
+	return bitbucket.projects.updateUserPermission({
+		workspace,
+		project_key: project,
+		selected_user_id,
+		_body: Object({
+			permission,
+		}),
+	});
+}
+
+export async function removeUserFromProject({
+	project,
+	workspace,
+	selected_user_id,
+}: RemoveUserFromProjectInput) {
+	return bitbucket.projects.deleteUserPermission({
+		workspace,
+		project_key: project,
+		selected_user_id,
+	});
+}
+
+export async function getUser(selected_user_id: string) {
+	const response = await bitbucket.users.get({ selected_user: selected_user_id });
+
+	return response.data;
 }
