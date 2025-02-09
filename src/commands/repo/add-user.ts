@@ -6,11 +6,11 @@ export const registerAddUserCommand = (parent: Command) => {
 		.command("add-user")
 		.alias("au")
 		.addOption(
-			new Option("-p, --repo <repo>", "Repo slug").makeOptionMandatory(),
+			new Option("-r, --repo <repo>", "Repo slug").makeOptionMandatory(),
 		)
 		.addOption(
 			new Option(
-				"-u, --user-account-id <user_account_id>",
+				"-u, --user-id <user_id>",
 				"User account id to add",
 			).makeOptionMandatory(),
 		)
