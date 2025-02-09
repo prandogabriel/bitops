@@ -6,7 +6,7 @@
     "bitops": "dist/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ENVIRONMENT=test vitest",
     "build": "node esbuild.js",
     "dev": "node esbuild.js --watch",
     "lint": "yarn biome lint --fix --unsafe",
@@ -24,8 +24,12 @@
     "@biomejs/biome": "1.9.4",
     "@inquirer/prompts": "^7.3.1",
     "@types/node": "^22.13.1",
+    "@vitest/coverage-v8": "^3.0.5",
+    "@vitest/eslint-plugin": "^1.1.27",
     "esbuild": "^0.25.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.5"
   }
 }

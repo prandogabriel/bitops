@@ -18,5 +18,7 @@ export const addUserToRepo = async (options: Options) => {
 		selected_user_id: options.userId,
 	});
 
-	logger.info(`📁 User ${response.data.user?.display_name} added to repo ${response.data.repository?.name} `);
+	logger.info(
+		`📁 User ${response.data.user?.display_name} added to repo ${response.data.repository?.name} `,
+	);
 };

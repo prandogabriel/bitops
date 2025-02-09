@@ -43,13 +43,14 @@ export const getBasicAuth = () => {
 		const data = readFileSync(CONFIG_FILE, "utf-8");
 		const json = JSON.parse(data);
 		if (!json.username || !json.appPass) {
-			logger.error("❌ Error reading config file, please create a config file with username and appPass.");
+			logger.error(
+				"❌ Error reading config file, please create a config file with username and appPass.",
+			);
 			process.exit(1);
-			
 		}
 		return json;
 	} catch (error) {
 		logger.error("❌ Error reading config file");
 		process.exit(1);
 	}
-}
+};

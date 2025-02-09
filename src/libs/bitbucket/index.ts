@@ -145,30 +145,16 @@ export async function updateRepoBranchRestriction({
 		uuid: string;
 	}[];
 }) {
-
-	console.log("posting", {
-		workspace,
-		repo_slug,
-		id: id.toString(),
-		_body: Object({
-			branch_match_kind: "glob",
-			users,
-			groups: [],
-			pattern: pattern,
-		}),
-	});
-	
-	return bitbucket.repositories.updateBranchRestriction({
-		workspace,
-		repo_slug,
-		id: id.toString(),
-		_body: Object({
-			branch_match_kind: "glob",
-			users,
-			groups: [],
-			pattern: pattern,
-		}),
-	}).catch((e) => {
-		console.log(e);
-	});
+	return bitbucket.repositories
+		.updateBranchRestriction({
+			workspace,
+			repo_slug,
+			id: id.toString(),
+			_body: Object({
+				branch_match_kind: "glob",
+				users,
+				groups: [],
+				pattern: pattern,
+			}),
+		});
 }
