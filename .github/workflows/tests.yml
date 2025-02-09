@@ -1,0 +1,17 @@
+name: Tests
+run-name: Run tests by ${{ github.actor }} on branch ${{ github.ref }}
+
+on:
+  workflow_dispatch:
+  push:
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  tests:
+    uses: prandogabriel/bitops/.github/workflows/reusable-tests.yml@main
+    secrets: inherit
+
+
+

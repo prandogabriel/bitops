@@ -1,0 +1,65 @@
+name: Workflow
+
+on:
+  workflow_call:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+
+      - name: 🏗️ Setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: yarn
+          node-version-file: .nvmrc
+
+      - name: 📥 Cache
+        uses: actions/cache@v4
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: 📦 Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+      
+      - name: 🧹 Lint
+        run: yarn lint
+
+  test:
+    runs-on: ubuntu-latest
+    steps:  
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v4
+      
+      - name: 🏗️ Setup Node
+        uses: actions/setup-node@v4
+        with:
+          cache: yarn
+          node-version-file: .nvmrc
+
+      - name: 📥 Cache
+        uses: actions/cache@v4
+        id: yarn-cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: 📦 Install
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: 🧪 Test
+        run: yarn test

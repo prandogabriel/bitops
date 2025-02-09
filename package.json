@@ -10,7 +10,9 @@
     "build": "node esbuild.js",
     "dev": "node esbuild.js --watch",
     "lint": "yarn biome lint --fix --unsafe",
-    "format": "yarn biome format --write"
+    "format": "yarn biome format --write",
+    "prepublish": "yarn build",
+    "release": "yarn build && npm publish --provenance --access public"
   },
   "license": "MIT",
   "dependencies": {
