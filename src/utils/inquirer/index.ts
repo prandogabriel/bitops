@@ -73,41 +73,6 @@ export const askId = async (action: string, ids: number[]) => {
 	return id;
 };
 
-export const askBranchType = async (defaultValue: string) => {
-	const { branchType } = await inquirer.prompt([
-		{
-			type: "list",
-			name: "branchType",
-			message: "Select the branch restriction type:",
-			choices: [
-				{ name: "Push Restriction", value: "push" },
-				{ name: "Force Push Restriction", value: "force" },
-				{ name: "Delete Restriction", value: "delete" },
-				{ name: "Merge Check Restriction", value: "merge-check" },
-			],
-			default: defaultValue,
-		},
-	]);
-	return branchType;
-};
-
-export const askPermission = async (defaultValue: string) => {
-	const { permission } = await inquirer.prompt([
-		{
-			type: "list",
-			name: "permission",
-			message: "Select the new permission level:",
-			choices: [
-				{ name: "Read", value: "read" },
-				{ name: "Write", value: "write" },
-				{ name: "Admin", value: "admin" },
-			],
-			default: defaultValue,
-		},
-	]);
-	return permission;
-};
-
 export const askBranchPattern = async (defaultValue: string) => {
 	const { branchPattern } = await inquirer.prompt([
 		{
