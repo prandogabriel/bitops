@@ -1,11 +1,24 @@
 import * as bitbucket from "@libs/bitbucket";
 import { logger } from "@libs/logger";
 
-// TODO pass a object with {name, description, key} provide by options
-export const createRepo = async (name: string, project: string) => {
+type Options = {
+	name: string;
+	project: string;
+	description?: string;
+  workspace: string;
+  public: boolean;
+};
+
+export const createRepo = async (opts: Options) => {
   logger.info("📁 Creating repo: name...");
 
-  const response = await bitbucket.createRepo(name, project);
+  const response = await bitbucket.createRepo({
+    workspace: opts.workspace,
+    project: opts.project,
+    name: opts.name,
+    description: opts.description?? "",
+    is_private: !opts.public,
+  });
 
   logger.info(`📁 repo created, you can access on: ${response.data.links?.html?.href}`);
 }

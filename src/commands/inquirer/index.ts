@@ -10,10 +10,10 @@ const askInput = async (message: string): Promise<string> => {
 	return response.value;
 };
 
-const chooseInput = async (
+async function chooseInput<T = string>(
 	message: string,
-	choices: { name: string; value: string }[],
-): Promise<string> => {
+	choices: { name: string; value: string | boolean }[],
+): Promise<T> {
 	const response = await inquirer.prompt({
 		type: "list",
 		name: "value",
@@ -22,30 +22,14 @@ const chooseInput = async (
 	});
 
 	return response.value;
+}
+
+export const askName = async (resourceType: string) => {
+	return askInput(`What is the ${resourceType} name?`);
 };
 
-export const askProjectName = async () => {
-	return askInput("What is the project name?");
-};
-
-export const askRepoName = async () => {
-	return askInput("What is the repository name?");
-};
-
-export const askProjectKey = async () => {
-	return askInput("What is the project key?");
-};
-
-export const askRepoKey = async () => {
-	return askInput("What is the repository key?");
-};
-
-export const askDescription = async () => {
-	return askInput("What is the description?");
-};
-
-export const askWorkspace = async () => {
-	return askInput("What is the workspace?");
+export const askDescription = async (resourceType: string) => {
+	return askInput(`What is the ${resourceType} description?`);
 };
 
 export const askResourceType = async () => {
@@ -54,4 +38,24 @@ export const askResourceType = async () => {
 		{ name: "Repository", value: "repo" },
 		{ name: "Cancel", value: "cancel" },
 	]);
+};
+
+export const askVisibility = async (resourceType: string) => {
+	return chooseInput<boolean>(`Is the ${resourceType} public?`, [
+		{ name: "Yes", value: true },
+		{ name: "No", value: false },
+	]);
+};
+
+export const askWorkspace = async (
+	workspaces?: {
+		name: string;
+		value: string;
+	}[],
+) => {
+	if (!workspaces) {
+		return askInput("What is the workspace?");
+	}
+
+	return chooseInput("What is the workspace?", workspaces);
 };
