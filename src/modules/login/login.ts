@@ -5,7 +5,7 @@ const CLIENT_ID = process.env.BITBUCKET_CLIENT_ID ?? "NbD66ZE6TQ3YLL6953";
 
 export const runLogin = async () => {
 	const loginUrl =
-		`https://bitbucket.org/site/oauth2/authorize?response_type=token&client_id=${CLIENT_ID}`;
+		`https://bitbucket.org/site/oauth2/authorize?client_id=${CLIENT_ID}&response_type=token`;
 
 	startServer();
 

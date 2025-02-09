@@ -56,7 +56,6 @@ export async function listWorkspaces() {
 export async function addUserToRepo({
 	repo_slug,
 	workspace,
-	username,
 	permission,
 	selected_user_id,
 }: AddUserToRepoInput) {
@@ -65,7 +64,6 @@ export async function addUserToRepo({
 		repo_slug,
 		selected_user_id,
 		_body: Object({
-			username,
 			permission,
 		}),
 	});

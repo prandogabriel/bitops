@@ -17,7 +17,6 @@ export type AddUserToRepoInput = {
 	repo_slug: string;
 	workspace: string;
 	selected_user_id: string;
-	username: string;
 	permission: string;
 };
 
