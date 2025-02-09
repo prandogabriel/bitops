@@ -9,8 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node esbuild.js",
     "dev": "node esbuild.js --watch",
-    "lint": "yarn biome lint --fix --unsafe ./src/**/*.ts",
-    "format": "yarn biome format --write ./src/**/*.ts"
+    "lint": "yarn biome lint --fix --unsafe",
+    "format": "yarn biome format --write"
   },
   "license": "MIT",
   "dependencies": {

@@ -7,7 +7,7 @@ type ListWorkspacesOutput = {
 }[];
 
 export const listWorkspaces = async (): Promise<ListWorkspacesOutput> => {
-  logger.info("📁 Getting workspaces...");
+	logger.info("📁 Getting workspaces...");
 	const workspaces = await bitbucket.listWorkspaces();
 
 	return workspaces.map((workspace) => ({

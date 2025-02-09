@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { registerProjectCommand } from "@commands/project";
+import { registerRepoCommand } from "@commands/repo";
 import { logger } from "@libs/logger";
 import { Command } from "commander";
 import { registerLoginCommand } from "./commands/login";
@@ -14,6 +15,7 @@ program
 registerNewCommand(program);
 registerLoginCommand(program);
 registerProjectCommand(program);
+registerRepoCommand(program);
 
 program.parseAsync(process.argv).catch((error) => {
 	logger.error(error);

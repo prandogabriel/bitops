@@ -5,7 +5,7 @@ type Options = {
 	name: string;
 	public: boolean;
 	description?: string;
-  workspace: string;
+	workspace: string;
 };
 
 export const createProject = async (options: Options) => {
@@ -15,7 +15,7 @@ export const createProject = async (options: Options) => {
 		name: options.name,
 		description: options.description ?? "",
 		is_private: !options.public,
-    workspace: options.workspace
+		workspace: options.workspace,
 	});
 
 	logger.info(

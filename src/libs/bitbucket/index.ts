@@ -110,7 +110,9 @@ export async function removeUserFromProject({
 }
 
 export async function getUser(selected_user_id: string) {
-	const response = await bitbucket.users.get({ selected_user: selected_user_id });
+	const response = await bitbucket.users.get({
+		selected_user: selected_user_id,
+	});
 
 	return response.data;
 }

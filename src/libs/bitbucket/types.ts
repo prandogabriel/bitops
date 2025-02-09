@@ -21,9 +21,9 @@ export type AddUserToRepoInput = {
 };
 
 export type RemoveUserFromRepoInput = {
-  repo_slug: string;
-  workspace: string;
-  selected_user_id: string;
+	repo_slug: string;
+	workspace: string;
+	selected_user_id: string;
 };
 
 export type AddUserToProjectInput = {
@@ -34,7 +34,7 @@ export type AddUserToProjectInput = {
 };
 
 export type RemoveUserFromProjectInput = {
-  project: string;
-  workspace: string;
-  selected_user_id: string;
+	project: string;
+	workspace: string;
+	selected_user_id: string;
 };

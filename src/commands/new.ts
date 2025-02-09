@@ -10,6 +10,8 @@ import {
 	askWorkspace,
 } from "@utils/inquirer";
 import type { Command } from "commander";
+import { actionCreateProject } from "./project/new";
+import { actionCreateRepo } from "./repo/new";
 
 export const registerNewCommand = (parent: Command) => {
 	const that = parent
@@ -23,12 +25,12 @@ export const registerNewCommand = (parent: Command) => {
 		.option("-P, --public", "Make the resource public")
 		.action(async (options) => {
 			if (options.repo && options.project) {
-				await createRepo(options);
+				await actionCreateRepo(options);
 				return;
 			}
 
 			if (options.project) {
-				await createProject(options);
+				await actionCreateProject(options);
 				return;
 			}
 
@@ -43,30 +45,18 @@ export const registerNewCommand = (parent: Command) => {
 				return;
 			}
 
-			const name = await askName(resourceType);
-			const description = await askDescription(resourceType);
-			const visibility = await askVisibility(resourceType);
-			const workspace = await askWorkspace(availableWorkspaces);
+			options.name = await askName(resourceType);
+			options.description = await askDescription(resourceType);
+			options.public = await askVisibility(resourceType);
+			options.workspace = await askWorkspace(availableWorkspaces);
 
 			if (resourceType === "project") {
-				await createProject({
-					name,
-					public: visibility,
-					description,
-					workspace,
-				});
+				await actionCreateProject(options);
 			}
 
 			if (resourceType === "repo") {
-				const projectName = await askName("project");
-
-				await createRepo({
-					name,
-					project: projectName,
-					workspace,
-					description,
-					public: visibility,
-				});
+				options.project = await askName("project");
+				await actionCreateRepo(options);
 			}
 		});
 

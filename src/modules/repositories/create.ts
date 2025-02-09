@@ -5,20 +5,22 @@ type Options = {
 	name: string;
 	project: string;
 	description?: string;
-  workspace: string;
-  public: boolean;
+	workspace: string;
+	public: boolean;
 };
 
 export const createRepo = async (opts: Options) => {
-  logger.info("📁 Creating repo: name...");
+	logger.info("📁 Creating repo: name...");
 
-  const response = await bitbucket.createRepo({
-    workspace: opts.workspace,
-    project: opts.project,
-    name: opts.name,
-    description: opts.description?? "",
-    is_private: !opts.public,
-  });
+	const response = await bitbucket.createRepo({
+		workspace: opts.workspace,
+		project: opts.project,
+		name: opts.name,
+		description: opts.description ?? "",
+		is_private: !opts.public,
+	});
 
-  logger.info(`📁 repo created, you can access on: ${response.data.links?.html?.href}`);
-}
+	logger.info(
+		`📁 repo created, you can access on: ${response.data.links?.html?.href}`,
+	);
+};
