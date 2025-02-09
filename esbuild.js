@@ -1,5 +1,4 @@
 const esbuild = require("esbuild");
-const fs = require("node:fs");
 
 esbuild
   .build({
@@ -13,6 +12,3 @@ esbuild
     tsconfig: "tsconfig.json",
   })
   .catch(() => process.exit(1));
-
-fs.copyFileSync("src/server/server.cert", "dist/server.cert");
-fs.copyFileSync("src/server/server.key", "dist/server.key");
