@@ -17,7 +17,8 @@
     "bitbucket": "^2.12.0",
     "chalk": "^5.4.1",
     "commander": "^13.1.0",
-    "inquirer": "^12.4.1"
+    "inquirer": "^12.4.1",
+    "slugify": "^1.6.6"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

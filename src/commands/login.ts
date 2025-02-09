@@ -6,8 +6,8 @@ export const registerLoginCommand = (parent: Command) => {
 		.command("login")
 		.alias("l")
 		.description("Login using Bitbucket")
-		.action((options) => {
-			runLogin();
+		.action(async () => {
+			await runLogin();
 		});
 
 	return that;
