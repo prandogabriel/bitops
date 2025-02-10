@@ -1,10 +1,11 @@
 {
-  "name": "bitops",
-  "version": "0.0.1",
+  "name": "@prandogabriel/bitops",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "bin": {
     "bitops": "dist/index.js"
   },
+  "files": ["dist"],
   "repository": {
     "type": "git",
     "url": "https://github.com/prandogabriel/bitops.git"
