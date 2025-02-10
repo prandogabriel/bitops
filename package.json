@@ -12,11 +12,11 @@
   "scripts": {
     "test": "ENVIRONMENT=test vitest",
     "copy-certs": "cp -r ./src/server/server.cert ./dist/server.cert && cp -r ./src/server/server.key ./dist/server.key",
-    "build": "node esbuild.js && yarn copy-certs",
+    "build": "node esbuild.js && npm run copy-certs",
     "dev": "node esbuild.js --watch",
-    "lint": "yarn biome lint --fix --unsafe",
-    "format": "yarn biome format --write",
-    "release": "yarn build && npm publish --provenance --access public"
+    "lint": "biome lint --fix --unsafe",
+    "format": "biome format --write",
+    "release": "npm run build && npm publish --provenance --access public"
   },
   "dependencies": {
     "bitbucket": "^2.12.0",

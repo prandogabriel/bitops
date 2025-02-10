@@ -15,6 +15,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
     # needs: tests
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: 🛎️ Checkout
         uses: actions/checkout@v4
@@ -28,30 +31,25 @@ jobs:
       - name: 🏗️ Setup Node
         uses: actions/setup-node@v4
         with:
-          cache: yarn
+          cache: npm
           node-version-file: .nvmrc
           registry-url: https://registry.npmjs.org
 
       - name: 📥 Cache
         uses: actions/cache@v4
-        id: yarn-cache
+        id: npm-cache
         with:
           path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-npm-
 
       - name: 📦 Install
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
-
-      - name: 🗝️ Login
-        run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: 🚀 Release
-        run: yarn release
+        run: npm run release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
