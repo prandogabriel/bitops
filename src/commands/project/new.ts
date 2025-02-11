@@ -18,7 +18,6 @@ export const registerNewCommand = (parent: Command) => {
 		.option("-p, --name <name>", "Create a new project")
 		.option("-d, --description <description>", "Description of the resource")
 		.option("-w, --workspace <workspace>", "Workspace to create the resource")
-		.option("-P, --public", "Make the resource public")
 		.action(async (options) => actionCreateProject(options));
 
 	return that;
@@ -38,12 +37,11 @@ export async function actionCreateProject(options: any) {
 	]);
 
 	const description = await askDescription("project");
-	const visibility = await askVisibility("project");
 	const workspace = await askWorkspace(availableWorkspaces);
 
 	await createProject({
 		name,
-		public: visibility,
+		public: false,
 		description,
 		workspace,
 	});

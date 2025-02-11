@@ -20,7 +20,6 @@ export const registerNewCommand = (parent: Command) => {
 		.option("-r, --repo <name>", "Create a new repository")
 		.option("-d, --description <description>", "Description of the resource")
 		.option("-w, --workspace <workspace>", "Workspace to create the resource")
-		.option("-P, --public", "Make the resource public")
 		.action(async (options) => {
 			if (options.repo && options.project) {
 				await actionCreateRepo(options);
@@ -45,7 +44,6 @@ export const registerNewCommand = (parent: Command) => {
 
 			options.name = await askName(resourceType);
 			options.description = await askDescription(resourceType);
-			options.public = await askVisibility(resourceType);
 			options.workspace = await askWorkspace(availableWorkspaces);
 
 			if (resourceType === "project") {
