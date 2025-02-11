@@ -19,7 +19,6 @@ export const registerNewCommand = (parent: Command) => {
 		.option("-r, --name <name>", "Create a new repository")
 		.option("-d, --description <description>", "Description of the resource")
 		.option("-w, --workspace <workspace>", "Workspace to create the resource")
-		.option("-P, --public", "Make the resource public")
 		.action(async (options) => actionCreateRepo(options));
 
 	return that;
@@ -39,7 +38,6 @@ export async function actionCreateRepo(options: any) {
 	]);
 
 	const description = await askDescription("repo");
-	const visibility = await askVisibility("repo");
 	const workspace = await askWorkspace(availableWorkspaces);
 
 	const projectName = await askName("project");
@@ -49,6 +47,6 @@ export async function actionCreateRepo(options: any) {
 		project: projectName,
 		workspace,
 		description,
-		public: visibility,
+		public: false,
 	});
 }
