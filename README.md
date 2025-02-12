@@ -102,7 +102,7 @@ Options:
 To create a new repository:
 
 ```sh
-bitops repo new -n <repository-name> -p <project-key> [--description <description>]
+bitops repo new -n <repository-name> -p <project-key> -w <workspace> [--description <description>]
 ```
 
 #### Command Options
