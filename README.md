@@ -102,7 +102,7 @@ Options:
 To create a new repository:
 
 ```sh
-bitops repo new -n <repository-name> -p <project-key> [--description <description>]
+bitops repo new -n <repository-name> -p <project-key> -w <workspace> [--description <description>]
 ```
 
 #### Command Options
@@ -124,7 +124,6 @@ Options:
 
 To add a user to a repository:
 
-```sh
 ```sh
 bitops repo add-user -u <user-account-id> --repository <repository-slug> [--role <role>]
 ```
