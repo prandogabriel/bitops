@@ -125,7 +125,6 @@ Options:
 To add a user to a repository:
 
 ```sh
-```sh
 bitops repo add-user -u <user-account-id> --repository <repository-slug> [--role <role>]
 ```
 
