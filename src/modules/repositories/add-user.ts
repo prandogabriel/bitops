@@ -19,6 +19,6 @@ export const addUserToRepo = async (options: Options) => {
 	});
 
 	logger.info(
-		`📁 User ${response.data.user?.display_name} added to repo ${response.data.repository?.name} `,
+		`📁 User ${response.data.user?.display_name} added to repo ${response.data.repository?.name ?? ""} `,
 	);
 };
