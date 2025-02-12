@@ -94,6 +94,11 @@ export const updateBranchRestriction = async (options: Options) => {
 		});
 		logger.info("✅ Branch restriction updated successfully!");
 	} catch (error) {
-		logger.error(`❌ Failed to update branch restriction: ${error}`);
+		let errorMessages = "";
+		if (error instanceof Error) {
+			error.stack = undefined;
+			errorMessages = JSON.stringify(error);
+		}
+		logger.error(`❌ Failed to update branch restriction: ${errorMessages}`);
 	}
 };
