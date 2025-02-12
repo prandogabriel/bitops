@@ -15,7 +15,7 @@ export const registerNewCommand = (parent: Command) => {
 		.command("new")
 		.alias("n")
 		.description("Create a new project (project)")
-		.option("-p, --name <name>", "Create a new project")
+		.option("-n, --name <name>", "Create a new project")
 		.option("-d, --description <description>", "Description of the resource")
 		.option("-w, --workspace <workspace>", "Workspace to create the resource")
 		.action(async (options) => actionCreateProject(options));

@@ -91,7 +91,7 @@ Usage: bitops project new|n [options]
 Create a new project (project)
 
 Options:
-  -p, --name <name>                Create a new project
+  -n, --name <name>                Create a new project
   -d, --description <description>  Description of the resource
   -w, --workspace <workspace>      Workspace to create the resource
   -h, --help                       Display help for command
