@@ -20,7 +20,7 @@ export async function createProject({
 		_body: Object({
 			name,
 			is_private,
-			key: createSlug(name),
+			key: createSlug(name).replace(/-/g, ""),
 			description: description,
 		}),
 	});

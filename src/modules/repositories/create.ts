@@ -1,5 +1,6 @@
 import * as bitbucket from "@libs/bitbucket";
 import { logger } from "@libs/logger";
+import { createSlug } from "@utils/slug";
 
 type Options = {
 	name: string;
@@ -15,7 +16,7 @@ export const createRepo = async (opts: Options) => {
 	const response = await bitbucket.createRepo({
 		workspace: opts.workspace,
 		project: opts.project,
-		name: opts.name,
+		name: createSlug(opts.name),
 		description: opts.description ?? "",
 		is_private: !opts.public,
 	});
